@@ -1,0 +1,21 @@
+# Project exclude paths
+/microcloud-api/target/
+/microcloud-config/target/
+/microcloud-consumer/target/
+/microcloud-consumer-feign/target/
+/microcloud-consumer-hystrix--dashboard/target/
+/microcloud-consumer-ribbon/target/
+/microcloud-consumer-turbine/target/
+/microcloud-eureka/target/
+/microcloud-eureka2/target/
+/microcloud-eureka3/target/
+/microcloud-provider-product/target/
+/microcloud-provider-product2/target/
+/microcloud-provider-product3/target/
+/microcloud-provider-product-hystrix/target/
+/microcloud-provider-user-hystrix/target/
+/microcloud-security/target/
+/microcloud-service/target/
+/microcloud-sleuth/target/
+/microcloud-stream-provider/target/
+/microcloud-zuul-gateway/target/

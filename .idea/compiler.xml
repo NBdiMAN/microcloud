@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="microcloud-consumer-feign" />
+        <module name="microcloud-consumer-hystrix-dashboard" />
+        <module name="microcloud-service" />
+        <module name="microcloud-stream-channel" />
+        <module name="microcloud-consumer-hystrix--dashboard" />
+        <module name="microcloud-zuul-gateway" />
+        <module name="microcloud-provider-product" />
+        <module name="microcloud-api" />
+        <module name="microcloud-consumer" />
+        <module name="microcloud-security" />
+        <module name="microcloud-consumer-turbine" />
+        <module name="microcloud-config" />
+        <module name="microcloud-consumer-ribbon" />
+        <module name="microcloud-provider-product-hystrix" />
+        <module name="microcloud-eureka3" />
+        <module name="microcloud-eureka2" />
+        <module name="microcloud-stream-provider" />
+        <module name="microcloud-sleuth" />
+        <module name="microcloud-provider-user-hystrix" />
+        <module name="microcloud-eureka" />
+        <module name="microcloud-provider-product2" />
+        <module name="microcloud-provider-product3" />
+        <module name="microcloud-stream-consumer" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="microcloud-consumer-fegin" target="1.8" />
+      <module name="microcloud-consumer-hystrix-dashboard" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

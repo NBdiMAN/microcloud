@@ -1,0 +1,30 @@
+server:
+  port: 8402
+
+spring:
+  cloud:
+    stream:
+      rabbit:
+        bindings:
+          wy_input:
+            consumer:
+              bindingRoutingKey: wyKey #设置一个RoutingKey的信息
+      binders: #在此处配置要绑定的rabbitmq的配置信息
+        defaultRabbit: # 表示定义的名称，用于rabbitmq整合
+          type: rabbit #消息组件类型
+          environment: #设置rabbitmq的相关环境配置
+            spring:
+              rabbitmq:
+                address: localhost
+                port: 5672
+                username: wy
+                password: 123456
+                virtual-host: /
+      bindings: #服务的整合处理
+        wy_input: #通道名称
+          destination: wyExchange #表示要使用的Exchange名称定义
+          content-type: application-json #设置消息类型，这里是json对象
+          binder: defaultRabbit #设置要绑定的消息服务
+          group: wy_group #制定队列名，如果消费者是集群，那么不加队列名，对导致每个消费者都消费一次
+  application:
+    name: microcloud-stream-consumer

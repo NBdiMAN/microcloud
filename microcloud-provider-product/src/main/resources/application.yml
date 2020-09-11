@@ -1,0 +1,35 @@
+server:
+  port: 8080
+mybatis:
+  mapper-locations: classpath:mapping/*.xml
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/microcloud?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&useSSL=false&serverTimezone=GMT%2B8
+    username: root
+    password: 123456
+  application:
+    name: microcloud-provider-product
+logging:
+  level:
+    com.wy.mapper: debug
+
+eureka:
+  client:
+    service-url:
+      #defaultZone: http://localhost:7001/eureka #eureka服务端没有认证
+      #defaultZone: http://admin:123456@eureka1:7001/eureka #eureka服务端需要认证
+      defaultZone: http://admin:123456@eureka1:7001/eureka,http://admin:123456@eureka2:7002/eureka,http://admin:123456@eureka3:7003/eureka
+    instance:
+      instance-id: microcloud-provider-product
+      prefer-ip-address: true
+      lease-renewal-internal-in-seconds: 2 #设置心跳的时间间隔，默认是30s
+      lease-expiration-duration-in-seconds: 5 #如果eureka超过了5s间隔没有收到心跳，就认为服务挂了，默认是90s
+info:
+  app.name: microcloud-provider-product
+  company.name: wy
+  build.artifactId: @project.artifactId@
+  build.modelVersion: @project.modelVersion@
+
+

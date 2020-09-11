@@ -1,0 +1,49 @@
+server:
+  port: 9501
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://admin:123456@eureka1:7001/eureka,http://admin:123456@eureka2:7002/eureka,http://admin:123456@eureka3:7003/eureka
+    instance:
+      instance-id: microcloud-zuul-gateway
+      prefer-ip-address: true
+      lease-renewal-interval-in-seconds: 2 # 设置心跳的时间间隔（默认是30秒）
+      lease-expiration-duration-in-seconds: 5 # 如果现在超过了5秒的间隔（默认是90秒）
+spring:
+  zipkin:
+    base-url: http://localhost:8601 #所在的数据提交到此服务中
+    sender:
+      type: web #提交的类型是web服务
+  sleuth:
+    sampler:
+      probability: 1.0 #定义抽样比例，默认为0.1
+  application:
+    name: microcloud-zuul-gateway
+  security:
+    user:
+      name: admin
+      password: 123456
+#zuul:
+#  routes:
+#    #将服务映射到制定的路径
+#    microcloud-provider-users: /user-proxy/**
+#  #屏蔽原来的服务路径，如原来可以使用http://localhost:9501/microcloud-provider-users/users/get/1，现在只能http://localhost:9501/user-proxy/users/get/1
+#  ignored-services: "*"
+#  #路径加前缀
+#  prefix: /wy
+zuul: #与上面的作用相同
+  routes:
+    users: #使用eureka，用服务名做映射
+      path: /user-proxy/**
+      serviceId: microcloud-provider-users
+    users2: #不使用eureka，使用url直接调用
+      path: /user2-proxy/**
+      url: http://localhost:8090/
+    product:
+      path: /product-proxy/**
+      serviceId: microcloud-provider-product
+  #屏蔽原来的服务路径，如原来可以使用http://localhost:9501/microcloud-provider-users/users/get/1，现在只能http://localhost:9501/user-proxy/users/get/1
+  ignored-services:
+    "*"
+  #prefix: /wy

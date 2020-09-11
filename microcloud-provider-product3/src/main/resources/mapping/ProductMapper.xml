@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wy.mapper.ProductMapper">
+    <resultMap id="baseResultMap" type="com.wy.vo.Product">
+        <id column="product_id" property="productId"/>
+        <result column="product_name" property="productName"/>
+        <result column="product_desc" property="productDesc"/>
+    </resultMap>
+
+    <sql id="baseColumn">
+        product_id,product_name,product_desc
+    </sql>
+    <select id="findById" resultMap="baseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="baseColumn"/>
+        from product where product_id = #{id}
+    </select>
+
+    <select id="findAll" resultMap="baseResultMap">
+        select
+        <include refid="baseColumn"/>
+        from product
+    </select>
+
+    <insert id="create" parameterType="com.wy.vo.Product">
+        <selectKey order="AFTER" keyProperty="productId" resultType="Long">
+            SELECT LAST_INSERT_ID();
+        </selectKey>
+        insert into product
+        <trim suffix="(" prefix=")">
+            <include refid="baseColumn"/>
+        </trim>
+        <trim prefix="values(" suffix=")">
+            #{productId},#{productName},#{productDesc}
+        </trim>
+    </insert>
+</mapper>

@@ -1,0 +1,43 @@
+server:
+  port: 8090
+
+spring:
+  application:
+    name: microcloud-provider-users
+  zipkin:
+    base-url: http://localhost:8601 #所在的数据提交到此服务中
+    sender:
+      type: web #提交的类型是web服务
+  sleuth:
+    sampler:
+      probability: 1.0 #定义抽样比例，默认为0.1
+
+
+
+logging:
+  level:
+    com.wy.mapper: debug
+
+eureka:
+  client: # 客户端进行Eureka注册的配置
+    service-url:
+      defaultZone: http://admin:123456@eureka1:7001/eureka,http://admin:123456@eureka2:7002/eureka,http://admin:123456@eureka3:7003/eureka
+  instance:
+    instance-id: microcloud-provider-users
+    prefer-ip-address: true
+    lease-renewal-interval-in-seconds: 2 # 设置心跳的时间间隔（默认是30秒）
+    lease-expiration-duration-in-seconds: 5  # 如果现在超过了5秒的间隔（默认是90秒）
+
+
+
+info:
+  app.name: microcloud-provider-users
+  company.name: wy
+  build.artifactId: @project.artifactId@
+  build.modelVersion: @project.modelVersion@
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'

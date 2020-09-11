@@ -1,0 +1,29 @@
+server:
+  port: 8401
+
+spring:
+  cloud:
+    stream:
+      rabbit:
+        bindings:
+          wy_out:
+            producer:
+              routingKeyExpression: '''wyKey11'''
+      binders: #在此处配置要绑定的rabbitmq的配置信息
+        defaultRabbit: # 表示定义的名称，用于rabbitmq整合
+          type: rabbit #消息组件类型
+          environment: #设置rabbitmq的相关环境配置
+            spring:
+              rabbitmq:
+                address: localhost
+                port: 5672
+                username: wy
+                password: 123456
+                virtual-host: /
+      bindings: #服务的整合处理
+        wy_output: #通道名称
+          destination: wyExchange #表示要使用的Exchange名称定义
+          content-type: application-json #设置消息类型，这里是json对象
+          binder: defaultRabbit #设置要绑定的消息服务
+  application:
+    name: microcloud-stream-provider

@@ -1,0 +1,20 @@
+server:
+  port: 7003
+eureka:
+  client:
+    fetch-registry: true #eureka是否需要从eureka获取注册信息,集群时需要打开
+    register-with-eureka: true #eureka自身是否需要注册,集群时需要打开
+    service-url:
+      defaultZone: http://admin:123456@eureka1:7001/eureka,http://admin:123456@eureka2:7002/eureka,http://admin:123456@eureka3:7003/eureka
+  server:
+    eviction-interval-timer-in-ms: 60000 #设置已关闭的服务清理时间间隔（ms,默认60s）
+    enable-self-preservation: true #是否打开保护模式，比如某个服务离线了，为了不马上删除，设置为保护模式
+  instance: #eureka实例
+    hostname: eureka3 #定义实例所在主机名称
+    #preferIpAddress: false
+spring:
+  security:
+    user:
+      name: admin
+      password: 123456
+      roles: USER,ADMIN

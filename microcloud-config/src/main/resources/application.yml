@@ -1,0 +1,11 @@
+server:
+  port: 7101
+spring:
+  application:
+    name: microcloud-config
+  cloud:
+    config:
+      server:
+        git:
+          url: https://github.com/NBdiMAN/microconfig.git #配置可以参照https://github.com/enjoyeud/microconfig
+          force-pull: true
